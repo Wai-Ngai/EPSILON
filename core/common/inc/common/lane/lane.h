@@ -58,7 +58,14 @@ class Lane {
 
   ErrorType GetOrientationByArcLength(const decimal_t arc_length,
                                       decimal_t* angle) const;
-
+  
+  /**
+   * @brief 求(x, y)在frenet坐标上的投影点
+   * 
+   * @param vec_position 
+   * @param arc_length s
+   * @return ErrorType 
+   */
   ErrorType GetArcLengthByVecPosition(const Vecf<LaneDim>& vec_position,
                                       decimal_t* arc_length) const;
 

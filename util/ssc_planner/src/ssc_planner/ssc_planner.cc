@@ -133,6 +133,7 @@ ErrorType SscPlanner::RunOnce() {
     return kWrongStatus;
   }
 
+  // MPDM 前向仿真结果
   if (map_itf_->GetForwardTrajectories(&forward_behaviors_, &forward_trajs_,
                                        &surround_forward_trajs_) != kSuccess) {
     LOG(ERROR) << "[Ssc]fail to get forward trajectories.";
@@ -144,6 +145,8 @@ ErrorType SscPlanner::RunOnce() {
 
   static TicToc timer_stf;
   timer_stf.tic();
+
+  // 统一坐标转换到Frent
   if (StateTransformForInputData() != kSuccess) {
     LOG(ERROR) << "[Ssc]fail to transform state into ff.";
     return kWrongStatus;
@@ -172,6 +175,8 @@ ErrorType SscPlanner::RunOnce() {
     // p_ssc_map_->InflateObstacleGrid(ego_vehicle_.param());
     // printf("[SscPlanner] InflateObstacleGrid time cost: %lf ms\n",
     //        timer_infl.toc());
+
+    // 
     if (p_ssc_map_->ConstructCorridorUsingInitialTrajectory(
             p_ssc_map_->p_3d_grid(), forward_trajs_fs_[i]) != kSuccess) {
       LOG(ERROR) << "[Ssc]fail to construct corridor for behavior " << i;
@@ -188,6 +193,7 @@ ErrorType SscPlanner::RunOnce() {
 
   static TicToc timer_opt;
   timer_opt.tic();
+  // QP
   if (RunQpOptimization() != kSuccess) {
     LOG(ERROR) << "[Ssc]fail to optimize qp trajectories.\n";
     return kWrongStatus;

@@ -31,6 +31,10 @@ namespace planning {
 using ObstacleMapType = uint8_t;
 using SscMapDataType = uint8_t;
 
+/**
+ * @brief 时空联合地图
+ * 
+ */
 class SscMap {
  public:
   using GridMap3D = common::GridMapND<ObstacleMapType, 3>;

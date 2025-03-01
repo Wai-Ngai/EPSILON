@@ -408,6 +408,7 @@ ErrorType SscMap::InflateCubeIn3dGrid(GridMap3D *p_grid,
   s_idx_l = std::max(s_idx_l, static_cast<int>((config_.s_back_len / 2.0) /
                                                config_.map_resolution[0]));
 
+  // 不停的找上下界
   while (!(x_p_finish && x_n_finish && y_p_finish && y_n_finish)) {
     if (!x_p_finish) x_p_finish = InflateCubeOnXPosAxis(p_grid, x_p_step, cube);
     if (!x_n_finish) x_n_finish = InflateCubeOnXNegAxis(p_grid, x_n_step, cube);

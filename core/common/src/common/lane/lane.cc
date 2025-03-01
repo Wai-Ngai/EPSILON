@@ -116,6 +116,7 @@ ErrorType Lane::GetArcLengthByVecPosition(const Vecf<LaneDim>& vec_position,
   static constexpr int kMaxCnt = 4;
   static constexpr decimal_t kMaxDistSquare = 900.0;
 
+  // 参考线的上下界
   const decimal_t val_lb = position_spline_.begin();
   const decimal_t val_ub = position_spline_.end();
   decimal_t step = (val_ub - val_lb) * 0.5;
@@ -127,6 +128,7 @@ ErrorType Lane::GetArcLengthByVecPosition(const Vecf<LaneDim>& vec_position,
 
   // printf("[XXX]s1 = %lf, s2 = %lf, s3 = %lf\n", s1, s2, s3);
 
+  // 计算参考线上3个点的坐标(x, y)
   Vecf<LaneDim> start_pos, mid_pos, final_pos;
   position_spline_.evaluate(s1, &start_pos);
   position_spline_.evaluate(s2, &mid_pos);
